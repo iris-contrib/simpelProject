@@ -55,7 +55,7 @@ func main() {
 	//UserController
 	UserController := app.Party("/api/User", myJwtMiddleware.Serve)
 	UserController.Post("/Create", controller.Create)
-	UserController.Get("/GetUser", controller.GetUser)
+	UserController.Get("/Get", controller.GetUser)
 
 	app.Run(
 		iris.Addr(":8080"),
