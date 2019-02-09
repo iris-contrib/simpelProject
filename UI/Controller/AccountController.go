@@ -64,3 +64,8 @@ func Login(ctx iris.Context) {
 	Response.ErrorMessage = ""
 	ctx.JSON(Response)
 }
+
+func GetUser(ctx iris.Context) {
+	users, _ := Data.GetUser()
+	ctx.JSON(users)
+}

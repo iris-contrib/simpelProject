@@ -16,8 +16,10 @@ var (
 	database = flag.String("database", "SimpleProject", "the database name")
 )
 
+var db *sqlx.DB
+
 //GetDB ...
-func GetDB() *sqlx.DB {
+func GetDB() {
 	flag.Parse()
 	if *debug {
 		fmt.Printf(" password:%s\n", *password)
@@ -37,6 +39,7 @@ func GetDB() *sqlx.DB {
 	}
 
 	//	fmt.Printf("Connected!\n")
-	//defer conn.Close()
-	return conn
+	//	defer conn.Close()
+	db = conn
+	//return conn
 }

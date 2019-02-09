@@ -7,7 +7,7 @@ import (
 
 func GetUserByUserName(UserName string) (*Model.User, error) {
 	var user Model.User
-	err := GetDB().QueryRowx(
+	err := db.QueryRowx(
 		"app.GetUserByUserName",
 		sql.Named("UserName", UserName),
 	).StructScan(&user)

@@ -27,6 +27,8 @@ func Create(ctx iris.Context) {
 		return
 	}
 
+	user.Password = Util.HashAndSalt(user.Password)
+
 	userId, err := Data.CreateUser(user)
 
 	if err != nil {

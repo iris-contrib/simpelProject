@@ -2,12 +2,13 @@ package Data
 
 import (
 	"SimpleProject/Domin/Dto"
+	"SimpleProject/Domin/Model"
 	"database/sql"
 )
 
 func CreateUser(user dto.User) (*int, error) {
 	var userId int
-	err := GetDB().QueryRow("app.CreateUser",
+	err := db.QueryRow("app.CreateUser",
 		sql.Named("UserName", user.UserName),
 		sql.Named("Password", user.Password),
 		sql.Named("FirstName", user.FirstName),
@@ -19,4 +20,10 @@ func CreateUser(user dto.User) (*int, error) {
 		return nil, err
 	}
 	return &userId, nil
+}
+
+func GetUser() (*[]Model.User, error) {
+	var d []Model.User
+	db.Select(&d, "app.GetUser")
+	return &d, nil
 }

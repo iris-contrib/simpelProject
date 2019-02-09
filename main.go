@@ -1,6 +1,7 @@
 package main
 
 import (
+	"SimpleProject/Domin/Data"
 	"SimpleProject/Domin/Util"
 	"SimpleProject/UI/Controller"
 
@@ -13,6 +14,8 @@ import (
 )
 
 func main() {
+
+	Data.GetDB()
 
 	myJwtMiddleware := jwtmiddleware.New(jwtmiddleware.Config{
 		ValidationKeyGetter: func(token *jwt.Token) (interface{}, error) {
@@ -46,11 +49,12 @@ func main() {
 	app.Use(requestLogger)
 
 	//AccountController
-	AccountController := app.Party("/Account")
+	AccountController := app.Party("/api/Account")
 	AccountController.Post("/Login", Controller.Login)
+	AccountController.Get("/GetUser", Controller.GetUser)
 
 	//UserController
-	UserController := app.Party("/User", myJwtMiddleware.Serve)
+	UserController := app.Party("/api/User", myJwtMiddleware.Serve)
 	UserController.Post("/Create", Controller.Create)
 
 	app.Run(
