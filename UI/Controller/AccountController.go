@@ -1,57 +1,58 @@
-package Controller
+package controller
 
 import (
-	"SimpleProject/Domin/Data"
 	dto "SimpleProject/Domin/Dto"
-	"SimpleProject/Domin/Util"
+	"SimpleProject/Domin/data"
+	"SimpleProject/Domin/util"
 
 	"github.com/kataras/iris"
 )
 
+//Login ...
 func Login(ctx iris.Context) {
 	login := dto.Login{}
 	if err := ctx.ReadJSON(&login); err != nil {
-		Response.Data = nil
-		Response.Status = false
-		Response.ErrorMessage = err.Error()
-		ctx.JSON(Response)
+		response.Data = nil
+		response.Status = false
+		response.ErrorMessage = err.Error()
+		ctx.JSON(response)
 		return
 	}
-	if err := Util.IsValid(login); err != nil {
-		Response.Data = nil
-		Response.Status = false
-		Response.ErrorMessage = err.Error()
-		ctx.JSON(Response)
+	if err := util.IsValid(login); err != nil {
+		response.Data = nil
+		response.Status = false
+		response.ErrorMessage = err.Error()
+		ctx.JSON(response)
 		return
 	}
 
-	user, err := Data.GetUserByUserName(login.UserName)
+	user, err := data.GetUserByUserName(login.UserName)
 
 	if err != nil {
-		Response.Data = nil
-		Response.Status = false
-		Response.ErrorMessage = err.Error()
-		ctx.JSON(Response)
+		response.Data = nil
+		response.Status = false
+		response.ErrorMessage = err.Error()
+		ctx.JSON(response)
 		return
 	}
 
-	checkPassword := Util.ComparePasswords(user.Password, login.Password)
+	checkPassword := util.ComparePasswords(user.Password, login.Password)
 
 	if checkPassword == false {
-		Response.Data = nil
-		Response.Status = false
-		Response.ErrorMessage = "Password is mistake"
-		ctx.JSON(Response)
+		response.Data = nil
+		response.Status = false
+		response.ErrorMessage = "Password is mistake"
+		ctx.JSON(response)
 		return
 	}
 
-	token, err := Util.CreateTokenEndpoint(user)
+	token, err := util.CreateTokenEndpoint(user)
 
 	if err != nil {
-		Response.Data = nil
-		Response.Status = false
-		Response.ErrorMessage = err.Error()
-		ctx.JSON(Response)
+		response.Data = nil
+		response.Status = false
+		response.ErrorMessage = err.Error()
+		ctx.JSON(response)
 		return
 	}
 
@@ -59,13 +60,8 @@ func Login(ctx iris.Context) {
 
 	Token.AuthToken = token
 
-	Response.Data = Token
-	Response.Status = true
-	Response.ErrorMessage = ""
-	ctx.JSON(Response)
-}
-
-func GetUser(ctx iris.Context) {
-	users, _ := Data.GetUser()
-	ctx.JSON(users)
+	response.Data = Token
+	response.Status = true
+	response.ErrorMessage = ""
+	ctx.JSON(response)
 }

@@ -1,5 +1,6 @@
 package dto
 
+//Response dto ....
 type Response struct {
 	Status       bool        `json:"Status"`
 	Data         interface{} `json:"Data"`

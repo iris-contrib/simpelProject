@@ -1,48 +1,65 @@
-package Controller
+package controller
 
 import (
-	"SimpleProject/Domin/Data"
 	dto "SimpleProject/Domin/Dto"
-	"SimpleProject/Domin/Util"
+	"SimpleProject/Domin/data"
+	"SimpleProject/Domin/util"
 
 	"github.com/kataras/iris"
 )
 
+//Create User ...
 func Create(ctx iris.Context) {
 	user := dto.User{}
 
 	if err := ctx.ReadJSON(&user); err != nil {
-		Response.Data = nil
-		Response.Status = false
-		Response.ErrorMessage = err.Error()
-		ctx.JSON(Response)
+		response.Data = nil
+		response.Status = false
+		response.ErrorMessage = err.Error()
+		ctx.JSON(response)
 		return
 	}
 
-	if err := Util.IsValid(user); err != nil {
-		Response.Data = nil
-		Response.Status = false
-		Response.ErrorMessage = err.Error()
-		ctx.JSON(Response)
+	if err := util.IsValid(user); err != nil {
+		response.Data = nil
+		response.Status = false
+		response.ErrorMessage = err.Error()
+		ctx.JSON(response)
 		return
 	}
 
-	user.Password = Util.HashAndSalt(user.Password)
+	user.Password = util.HashAndSalt(user.Password)
 
-	userId, err := Data.CreateUser(user)
+	UserID, err := data.CreateUser(user)
 
 	if err != nil {
-		Response.Data = nil
-		Response.Status = false
-		Response.ErrorMessage = err.Error()
-		ctx.JSON(Response)
+		response.Data = nil
+		response.Status = false
+		response.ErrorMessage = err.Error()
+		ctx.JSON(response)
 		return
 	}
 
 	var CreateUser dto.CreateUser
-	CreateUser.UserId = userId
-	Response.Data = CreateUser
-	Response.Status = true
-	Response.ErrorMessage = ""
-	ctx.JSON(Response)
+	CreateUser.UserID = UserID
+	response.Data = CreateUser
+	response.Status = true
+	response.ErrorMessage = ""
+	ctx.JSON(response)
+}
+
+//GetUser ...
+func GetUser(ctx iris.Context) {
+	users, err := data.GetUser()
+	if err != nil {
+		response.Status = false
+		response.Data = nil
+		response.ErrorMessage = err.Error()
+		ctx.JSON(response)
+		return
+	}
+	response.Status = true
+	response.Data = users
+	response.ErrorMessage = ""
+	ctx.JSON(response)
 }

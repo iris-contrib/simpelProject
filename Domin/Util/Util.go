@@ -1,7 +1,7 @@
-package Util
+package util
 
 import (
-	"SimpleProject/Domin/Model"
+	"SimpleProject/Domin/model"
 	"log"
 	"time"
 
@@ -10,8 +10,10 @@ import (
 	validator "gopkg.in/go-playground/validator.v9"
 )
 
+//JwtKey ...
 var JwtKey = "6150645367566B5970337336763979244226452948404D6251655468576D5A71"
 
+//HashAndSalt ...
 func HashAndSalt(password string) string {
 
 	pwd := []byte(password)
@@ -29,6 +31,7 @@ func HashAndSalt(password string) string {
 	return string(hash)
 }
 
+//ComparePasswords ...
 func ComparePasswords(hashedPwd string, password string) bool {
 	// Since we'll be getting the hashed password from the DB it
 	// will be a string so we'll need to convert it to a byte slice
@@ -43,11 +46,12 @@ func ComparePasswords(hashedPwd string, password string) bool {
 	return true
 }
 
-func CreateTokenEndpoint(user *Model.User) (string, error) {
+//CreateTokenEndpoint ...
+func CreateTokenEndpoint(user *model.User) (string, error) {
 
 	expireToken := time.Now().Add(time.Hour * 72).Unix()
 	claims := TokenClaims{
-		UserId:    user.UserId,
+		UserID:    user.UserID,
 		FirstName: user.FirstName,
 		LastName:  user.LastName,
 		Email:     user.Email,
@@ -65,6 +69,7 @@ func CreateTokenEndpoint(user *Model.User) (string, error) {
 	return tokenString, err
 }
 
+//ValidateToken ...
 func ValidateToken(tokenString string) (bool, error) {
 
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
@@ -82,6 +87,7 @@ func ValidateToken(tokenString string) (bool, error) {
 	return true, nil
 }
 
+//IsValid ...
 func IsValid(model interface{}) error {
 	var validate *validator.Validate
 	validate = validator.New()

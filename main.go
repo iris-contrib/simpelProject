@@ -1,9 +1,9 @@
 package main
 
 import (
-	"SimpleProject/Domin/Data"
-	"SimpleProject/Domin/Util"
-	"SimpleProject/UI/Controller"
+	"SimpleProject/Domin/data"
+	"SimpleProject/Domin/util"
+	"SimpleProject/UI/controller"
 
 	_ "github.com/denisenkom/go-mssqldb"
 	jwt "github.com/dgrijalva/jwt-go"
@@ -15,11 +15,11 @@ import (
 
 func main() {
 
-	Data.GetDB()
+	data.GetDB()
 
 	myJwtMiddleware := jwtmiddleware.New(jwtmiddleware.Config{
 		ValidationKeyGetter: func(token *jwt.Token) (interface{}, error) {
-			return []byte(Util.JwtKey), nil
+			return []byte(util.JwtKey), nil
 		},
 		SigningMethod: jwt.SigningMethodHS256,
 	})
@@ -50,12 +50,12 @@ func main() {
 
 	//AccountController
 	AccountController := app.Party("/api/Account")
-	AccountController.Post("/Login", Controller.Login)
-	AccountController.Get("/GetUser", Controller.GetUser)
+	AccountController.Post("/Login", controller.Login)
 
 	//UserController
 	UserController := app.Party("/api/User", myJwtMiddleware.Serve)
-	UserController.Post("/Create", Controller.Create)
+	UserController.Post("/Create", controller.Create)
+	UserController.Get("/GetUser", controller.GetUser)
 
 	app.Run(
 		iris.Addr(":8080"),

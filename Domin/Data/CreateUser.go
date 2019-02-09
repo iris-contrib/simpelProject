@@ -1,29 +1,29 @@
-package Data
+package data
 
 import (
 	"SimpleProject/Domin/Dto"
-	"SimpleProject/Domin/Model"
+	"SimpleProject/Domin/model"
 	"database/sql"
 )
 
 func CreateUser(user dto.User) (*int, error) {
-	var userId int
+	var UserID int
 	err := db.QueryRow("app.CreateUser",
 		sql.Named("UserName", user.UserName),
 		sql.Named("Password", user.Password),
 		sql.Named("FirstName", user.FirstName),
 		sql.Named("LastName", user.LastName),
 		sql.Named("Email", user.Email),
-	).Scan(&userId)
+	).Scan(&UserID)
 
 	if err != nil {
 		return nil, err
 	}
-	return &userId, nil
+	return &UserID, nil
 }
 
-func GetUser() (*[]Model.User, error) {
-	var d []Model.User
+func GetUser() (*[]model.User, error) {
+	var d []model.User
 	db.Select(&d, "app.GetUser")
 	return &d, nil
 }
