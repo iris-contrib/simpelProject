@@ -2,8 +2,7 @@ package util
 
 import jwt "github.com/dgrijalva/jwt-go"
 
-//TokenClaims ....
-type TokenClaims struct {
+type tokenClaims struct {
 	UserID    uint64 `json:"UserID"`
 	FirstName string `json:"FirstName"`
 	LastName  string `json:"LastName"`

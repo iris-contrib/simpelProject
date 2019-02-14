@@ -6,12 +6,22 @@ import (
 	"time"
 
 	jwt "github.com/dgrijalva/jwt-go"
+	jwtmiddleware "github.com/iris-contrib/middleware/jwt"
+	"github.com/kataras/iris/context"
 	"golang.org/x/crypto/bcrypt"
 	validator "gopkg.in/go-playground/validator.v9"
 )
 
 //JwtKey ...
-var JwtKey = "6150645367566B5970337336763979244226452948404D6251655468576D5A71"
+var jwtKey = "6150645367566B5970337336763979244226452948404D6251655468576D5A71"
+
+//MyJwtMiddleware ...
+var MyJwtMiddleware = jwtmiddleware.New(jwtmiddleware.Config{
+	ValidationKeyGetter: func(token *jwt.Token) (interface{}, error) {
+		return []byte(jwtKey), nil
+	},
+	SigningMethod: jwt.SigningMethodHS256,
+})
 
 //HashAndSalt ...
 func HashAndSalt(password string) string {
@@ -50,7 +60,7 @@ func ComparePasswords(hashedPwd string, password string) bool {
 func CreateTokenEndpoint(user *model.User) (string, error) {
 
 	expireToken := time.Now().Add(time.Hour * 72).Unix()
-	claims := TokenClaims{
+	claims := tokenClaims{
 		UserID:    user.UserID,
 		FirstName: user.FirstName,
 		LastName:  user.LastName,
@@ -64,7 +74,7 @@ func CreateTokenEndpoint(user *model.User) (string, error) {
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
-	tokenString, err := token.SignedString([]byte(JwtKey))
+	tokenString, err := token.SignedString([]byte(jwtKey))
 
 	return tokenString, err
 }
@@ -73,7 +83,7 @@ func CreateTokenEndpoint(user *model.User) (string, error) {
 func ValidateToken(tokenString string) (bool, error) {
 
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
-		return []byte(JwtKey), nil
+		return []byte(jwtKey), nil
 	})
 
 	if err != nil {
@@ -93,6 +103,19 @@ func IsValid(model interface{}) error {
 	validate = validator.New()
 	err := validate.Struct(model)
 	return err
+}
+
+//GetUserIDFromToken ....
+func GetUserIDFromToken(ctx context.Context) uint64 {
+	userToken := MyJwtMiddleware.Get(ctx)
+
+	var userID uint64
+
+	if claims, ok := userToken.Claims.(jwt.MapClaims); ok && userToken.Valid {
+		userID = claims["UserID"].(uint64)
+	}
+
+	return userID
 }
 
 // func ValidateToken(tokenString string) (bool, error) {
