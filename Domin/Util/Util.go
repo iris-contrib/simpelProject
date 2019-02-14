@@ -106,13 +106,13 @@ func IsValid(model interface{}) error {
 }
 
 //GetUserIDFromToken ....
-func GetUserIDFromToken(ctx context.Context) uint64 {
+func GetUserIDFromToken(ctx context.Context) float64 {
 	userToken := MyJwtMiddleware.Get(ctx)
 
-	var userID uint64
+	var userID float64
 
 	if claims, ok := userToken.Claims.(jwt.MapClaims); ok && userToken.Valid {
-		userID = claims["UserID"].(uint64)
+		userID = claims["UserID"].(float64)
 	}
 
 	return userID

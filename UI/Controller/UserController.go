@@ -48,9 +48,9 @@ func Create(ctx iris.Context) {
 	ctx.JSON(response)
 }
 
-//GetUser ...
-func GetUser(ctx iris.Context) {
-	users, err := data.GetUser()
+//Get All User ...
+func Get(ctx iris.Context) {
+	users, err := data.Get()
 	if err != nil {
 		response.Status = false
 		response.Data = nil
@@ -62,4 +62,25 @@ func GetUser(ctx iris.Context) {
 	response.Data = users
 	response.ErrorMessage = ""
 	ctx.JSON(response)
+}
+
+//GetUser : Get User By Token ...
+func GetUser(ctx iris.Context) {
+	userID := util.GetUserIDFromToken(ctx)
+
+	user, err := data.GetUser(userID)
+
+	if err != nil {
+		response.Status = false
+		response.Data = nil
+		response.ErrorMessage = err.Error()
+		ctx.JSON(response)
+		return
+	}
+
+	response.Status = true
+	response.Data = user
+	response.ErrorMessage = ""
+	ctx.JSON(response)
+
 }
