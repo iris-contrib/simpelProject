@@ -40,14 +40,14 @@ func main() {
 	app.Use(requestLogger)
 
 	//AccountController
-	AccountController := app.Party("/api/Account")
-	AccountController.Post("/Login", controller.Login)
+	accountController := app.Party("/api/Account")
+	accountController.Post("/Login", controller.Login)
 
 	//UserController
-	UserController := app.Party("/api/User", util.MyJwtMiddleware.Serve)
-	UserController.Post("/Create", controller.Create)
-	UserController.Get("/Get", controller.Get)
-	UserController.Get("/GetUser", controller.GetUser)
+	userController := app.Party("/api/User", util.MyJwtMiddleware.Serve)
+	userController.Post("/Create", controller.Create)
+	userController.Get("/Get", controller.Get)
+	userController.Get("/GetUser", controller.GetUser)
 
 	app.Run(
 		iris.Addr(":8080"),
