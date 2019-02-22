@@ -1,6 +1,6 @@
 package util
 
-import jwt "github.com/dgrijalva/jwt-go"
+import "github.com/dgrijalva/jwt-go"
 
 type tokenClaims struct {
 	UserID    uint64 `json:"UserID"`

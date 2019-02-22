@@ -5,11 +5,11 @@ import (
 	"log"
 	"time"
 
-	jwt "github.com/dgrijalva/jwt-go"
+	"github.com/dgrijalva/jwt-go"
 	jwtmiddleware "github.com/iris-contrib/middleware/jwt"
 	"github.com/kataras/iris/context"
 	"golang.org/x/crypto/bcrypt"
-	validator "gopkg.in/go-playground/validator.v9"
+	"gopkg.in/go-playground/validator.v9"
 )
 
 //JwtKey ...
@@ -80,22 +80,22 @@ func CreateTokenEndpoint(user *model.User) (string, error) {
 }
 
 //ValidateToken ...
-func ValidateToken(tokenString string) (bool, error) {
-
-	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
-		return []byte(jwtKey), nil
-	})
-
-	if err != nil {
-		panic(err)
-	}
-
-	if !token.Valid {
-		return false, nil
-	}
-
-	return true, nil
-}
+//func ValidateToken(tokenString string) (bool, error) {
+//
+//	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+//		return []byte(jwtKey), nil
+//	})
+//
+//	if err != nil {
+//		panic(err)
+//	}
+//
+//	if !token.Valid {
+//		return false, nil
+//	}
+//
+//	return true, nil
+//}
 
 //IsValid ...
 func IsValid(model interface{}) error {
