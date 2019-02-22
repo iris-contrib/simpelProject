@@ -1,7 +1,7 @@
 package controller
 
 import (
-	dto "SimpleProject/Domin/Dto"
+	"SimpleProject/Domin/Dto"
 	"SimpleProject/Domin/data"
 	"SimpleProject/Domin/util"
 
@@ -15,14 +15,14 @@ func Login(ctx iris.Context) {
 		response.Data = nil
 		response.Status = false
 		response.ErrorMessage = err.Error()
-		ctx.JSON(response)
+		var _, _ = ctx.JSON(response)
 		return
 	}
 	if err := util.IsValid(login); err != nil {
 		response.Data = nil
 		response.Status = false
 		response.ErrorMessage = err.Error()
-		ctx.JSON(response)
+		var _, _ = ctx.JSON(response)
 		return
 	}
 
@@ -32,7 +32,7 @@ func Login(ctx iris.Context) {
 		response.Data = nil
 		response.Status = false
 		response.ErrorMessage = err.Error()
-		ctx.JSON(response)
+		var _, _ = ctx.JSON(response)
 		return
 	}
 
@@ -42,7 +42,7 @@ func Login(ctx iris.Context) {
 		response.Data = nil
 		response.Status = false
 		response.ErrorMessage = "Password is mistake"
-		ctx.JSON(response)
+		var _, _ = ctx.JSON(response)
 		return
 	}
 
@@ -52,7 +52,7 @@ func Login(ctx iris.Context) {
 		response.Data = nil
 		response.Status = false
 		response.ErrorMessage = err.Error()
-		ctx.JSON(response)
+		var _, _ = ctx.JSON(response)
 		return
 	}
 
@@ -63,5 +63,5 @@ func Login(ctx iris.Context) {
 	response.Data = Token
 	response.Status = true
 	response.ErrorMessage = ""
-	ctx.JSON(response)
+	var _, _ = ctx.JSON(response)
 }

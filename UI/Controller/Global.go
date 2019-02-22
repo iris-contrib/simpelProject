@@ -1,5 +1,5 @@
 package controller
 
-import dto "SimpleProject/Domin/Dto"
+import "SimpleProject/Domin/Dto"
 
 var response dto.Response

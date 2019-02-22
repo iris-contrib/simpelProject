@@ -26,8 +26,8 @@ func CreateUser(user dto.User) (*int, error) {
 // Get All User ...
 func Get() (*[]model.User, error) {
 	var d []model.User
-	db.Select(&d, "app.GetUser")
-	return &d, nil
+	err := db.Select(&d, "app.GetUser")
+	return &d, err
 }
 
 //GetUser : Get User By UserId  ...

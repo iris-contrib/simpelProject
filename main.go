@@ -49,7 +49,7 @@ func main() {
 	userController.Get("/Get", controller.Get)
 	userController.Get("/GetUser", controller.GetUser)
 
-	app.Run(
+	var _ = app.Run(
 		iris.Addr(":8080"),
 		iris.WithoutServerError(iris.ErrServerClosed),
 		iris.WithOptimizations,

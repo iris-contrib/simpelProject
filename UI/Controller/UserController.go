@@ -16,7 +16,7 @@ func Create(ctx iris.Context) {
 		response.Data = nil
 		response.Status = false
 		response.ErrorMessage = err.Error()
-		ctx.JSON(response)
+		var _, _ = ctx.JSON(response)
 		return
 	}
 
@@ -24,7 +24,7 @@ func Create(ctx iris.Context) {
 		response.Data = nil
 		response.Status = false
 		response.ErrorMessage = err.Error()
-		ctx.JSON(response)
+		var _, _ = ctx.JSON(response)
 		return
 	}
 
@@ -36,7 +36,7 @@ func Create(ctx iris.Context) {
 		response.Data = nil
 		response.Status = false
 		response.ErrorMessage = err.Error()
-		ctx.JSON(response)
+		var _, _ = ctx.JSON(response)
 		return
 	}
 
@@ -45,7 +45,7 @@ func Create(ctx iris.Context) {
 	response.Data = CreateUser
 	response.Status = true
 	response.ErrorMessage = ""
-	ctx.JSON(response)
+	var _, _ = ctx.JSON(response)
 }
 
 //Get All User ...
@@ -55,13 +55,13 @@ func Get(ctx iris.Context) {
 		response.Status = false
 		response.Data = nil
 		response.ErrorMessage = err.Error()
-		ctx.JSON(response)
+		var _, _ = ctx.JSON(response)
 		return
 	}
 	response.Status = true
 	response.Data = users
 	response.ErrorMessage = ""
-	ctx.JSON(response)
+	var _, _ = ctx.JSON(response)
 }
 
 //GetUser : Get User By Token ...
@@ -74,13 +74,13 @@ func GetUser(ctx iris.Context) {
 		response.Status = false
 		response.Data = nil
 		response.ErrorMessage = err.Error()
-		ctx.JSON(response)
+		var _, _ = ctx.JSON(response)
 		return
 	}
 
 	response.Status = true
 	response.Data = user
 	response.ErrorMessage = ""
-	ctx.JSON(response)
+	var _, _ = ctx.JSON(response)
 
 }
