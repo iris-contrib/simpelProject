@@ -1,7 +1,7 @@
 package controller
 
 import (
-	dto "SimpleProject/Domin/Dto"
+	"SimpleProject/Domin/Dto"
 	"SimpleProject/Domin/data"
 	"SimpleProject/Domin/util"
 
