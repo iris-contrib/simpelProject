@@ -1,0 +1,79 @@
+sc create TestService binpath=C:\User\sds\Desktop\test.exe
+sc delete TestService 
+
+https://github.com/kardianos/minwinsvc
+https://github.com/kardianos/service
+
+
+
+import (
+	"SimpleProject/Domin/data"
+	"SimpleProject/Domin/util"
+	"SimpleProject/UI/controller"
+	_ "github.com/denisenkom/go-mssqldb"
+	"github.com/kataras/iris"
+	"log"
+
+	"github.com/kardianos/service"
+)
+
+var logger service.Logger
+
+type program struct{}
+
+func (p *program) Start(s service.Service) error {
+	// Start should not block. Do the actual work async.
+	go p.run()
+	return nil
+}
+func (p *program) run() {
+	// Do work here
+	data.GetDB()
+	app := iris.Default()
+
+	//AccountController
+	accountController := app.Party("/api/Account")
+	accountController.Post("/Login", controller.Login)
+
+	//UserController
+	userController := app.Party("/api/User", util.MyJwtMiddleware.Serve)
+	userController.Post("/Create", controller.Create)
+	userController.Get("/Get", controller.Get)
+	userController.Get("/GetUser", controller.GetUser)
+
+	var _ = app.Run(
+		iris.Addr(":8080"),
+		iris.WithoutServerError(iris.ErrServerClosed),
+		iris.WithOptimizations,
+	)
+
+
+
+
+}
+func (p *program) Stop(s service.Service) error {
+	// Stop should not block. Return with a few seconds.
+	return nil
+}
+
+func main() {
+	svcConfig := &service.Config{
+		Name:        "GoServiceExampleSimple",
+		DisplayName: "Go Service Example",
+		Description: "This is an example Go service.",
+	}
+
+	prg := &program{}
+	s, err := service.New(prg, svcConfig)
+	if err != nil {
+		log.Fatal(err)
+	}
+	logger, err = s.Logger(nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = s.Run()
+	if err != nil {
+		var _ = logger.Error(err)
+	}
+}
