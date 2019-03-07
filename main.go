@@ -1,4 +1,3 @@
-
 package main
 
 import (
@@ -10,23 +9,25 @@ import (
 	"github.com/kataras/iris"
 )
 
-func main(){
-		data.GetDB()
-		app := iris.Default()
+func main() {
+	data.GetDB()
+	app := iris.Default()
+	app.Use(util.Cors)
 
-		//AccountController
-		accountController := app.Party("/api/Account")
-		accountController.Post("/Login", controller.Login)
+	//AccountController
+	accountController := app.Party("/api/Account")
+	accountController.Post("/Login", controller.Login)
 
-		//UserController
-		userController := app.Party("/api/User", util.MyJwtMiddleware.Serve)
-		userController.Post("/Create", controller.Create)
-		userController.Get("/Get", controller.Get)
-		userController.Get("/GetUser", controller.GetUser)
+	//UserController
+	userController := app.Party("/api/User", util.MyJwtMiddleware.Serve)
+	userController.Post("/Create", controller.Create)
+	userController.Get("/Get", controller.Get)
+	userController.Get("/GetUser", controller.GetUser)
 
-		var _ = app.Run(
-			iris.Addr(":8080"),
-			iris.WithoutServerError(iris.ErrServerClosed),
-			iris.WithOptimizations,
-		)
+	var _ = app.Run(
+		iris.Addr(":8080"),
+		iris.WithoutServerError(iris.ErrServerClosed),
+		iris.WithOptimizations,
+		iris.WithoutPathCorrectionRedirection,
+	)
 }

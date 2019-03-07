@@ -118,6 +118,23 @@ func GetUserIDFromToken(ctx context.Context) float64 {
 	return userID
 }
 
+//Cors Origin...
+func Cors(ctx context.Context) {
+	ctx.Header("Access-Control-Allow-Origin", "*")
+	ctx.Header("Access-Control-Allow-Credentials", "true")
+	ctx.Next()
+}
+
+//GetCors ...
+//func GetCors() context.Handler {
+//	crs := cors.New(cors.Options{
+//		AllowedOrigins:   []string{"*"},
+//		AllowCredentials: true,
+//	})
+//
+//	return crs
+//}
+
 // func ValidateToken(tokenString string) (bool, error) {
 
 // 	token, err := jwt.ParseWithClaims(tokenString, &TokenClaims{}, func(token *jwt.Token) (interface{}, error) {
