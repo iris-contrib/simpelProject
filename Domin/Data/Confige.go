@@ -11,7 +11,7 @@ var (
 	debug    = flag.Bool("debug", false, "enable debugging")
 	password = flag.String("password", "Majid1212", "the database password")
 	port     = flag.Int("port", 1433, "the database port")
-	server   = flag.String("server", "192.168.228.129", "the database server")
+	server   = flag.String("server", "192.168.228.130", "the database server")
 	user     = flag.String("user", "SA", "the database user")
 	database = flag.String("database", "SimpleProject", "the database name")
 )
