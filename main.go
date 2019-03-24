@@ -1,10 +1,10 @@
 package main
 
 import (
-	"SimpleProject/Domin/util"
-	_ "SimpleProject/Startup"
-	"SimpleProject/UI/controller"
 	"github.com/kataras/iris"
+	"github.com/majidbigdeli/simpelProject/domin/util"
+	_ "github.com/majidbigdeli/simpelProject/startup"
+	"github.com/majidbigdeli/simpelProject/ui/controller"
 )
 
 func main() {

@@ -1,10 +1,10 @@
-package Startup
+package startup
 
 import (
-	"SimpleProject/Domin/data"
 	"fmt"
 
 	"github.com/kardianos/osext"
+	"github.com/majidbigdeli/simpelProject/domin/data"
 
 	_ "github.com/denisenkom/go-mssqldb"
 	_ "github.com/kardianos/minwinsvc"
@@ -20,7 +20,7 @@ func init() {
 	}
 
 	viper.SetConfigName("config")
-	viper.AddConfigPath(path)  // optionally look for config in the working directory
+	viper.AddConfigPath(path)
 	err = viper.ReadInConfig() // Find and read the config file
 	if err != nil {            // Handle errors reading the config file
 		panic(fmt.Errorf("Fatal error config file: %s \n", err))

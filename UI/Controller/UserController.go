@@ -1,11 +1,10 @@
 package controller
 
 import (
-	"SimpleProject/Domin/Dto"
-	"SimpleProject/Domin/data"
-	"SimpleProject/Domin/util"
-
 	"github.com/kataras/iris"
+	"github.com/majidbigdeli/simpelProject/domin/data"
+	"github.com/majidbigdeli/simpelProject/domin/dto"
+	"github.com/majidbigdeli/simpelProject/domin/util"
 )
 
 //Create User ...

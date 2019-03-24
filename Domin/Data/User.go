@@ -1,9 +1,10 @@
 package data
 
 import (
-	"SimpleProject/Domin/Dto"
-	"SimpleProject/Domin/model"
 	"database/sql"
+
+	"github.com/majidbigdeli/simpelProject/domin/dto"
+	"github.com/majidbigdeli/simpelProject/domin/model"
 )
 
 //CreateUser ...
