@@ -1,8 +1,8 @@
 package controller
 
 import (
-	"SimpleProject/Domin/Dto"
 	"SimpleProject/Domin/data"
+	"SimpleProject/Domin/dto"
 	"SimpleProject/Domin/util"
 
 	"github.com/kataras/iris"

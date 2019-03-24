@@ -1,7 +1,7 @@
 package data
 
 import (
-	"SimpleProject/Domin/Dto"
+	"SimpleProject/Domin/dto"
 	"SimpleProject/Domin/model"
 	"database/sql"
 )
