@@ -1,1 +1,3 @@
-module "SimpleProject"
+module SimpleProject
+
+go 1.12
