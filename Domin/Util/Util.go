@@ -1,13 +1,13 @@
 package util
 
 import (
-	"SimpleProject/Domin/model"
 	"log"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
 	jwtmiddleware "github.com/iris-contrib/middleware/jwt"
 	"github.com/kataras/iris/context"
+	"github.com/majidbigdeli/simpelProject/domin/model"
 	"golang.org/x/crypto/bcrypt"
 	"gopkg.in/go-playground/validator.v9"
 )

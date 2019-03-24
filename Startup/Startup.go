@@ -1,10 +1,10 @@
 package startup
 
 import (
-	"SimpleProject/Domin/data"
 	"fmt"
 
 	"github.com/kardianos/osext"
+	"github.com/majidbigdeli/simpelProject/domin/data"
 
 	_ "github.com/denisenkom/go-mssqldb"
 	_ "github.com/kardianos/minwinsvc"
