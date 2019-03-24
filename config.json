@@ -1,0 +1,10 @@
+{
+  "db": {
+    "debug": false,
+    "password": "Majid1212",
+    "port": 1433,
+    "server": "192.168.228.130",
+    "user": "SA",
+    "database": "SimpleProject"
+  }
+}
