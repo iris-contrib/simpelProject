@@ -1,4 +1,4 @@
-module SimpleProject
+module github.com\majidbigdeli\SimpeProject
 
 go 1.12
 
