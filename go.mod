@@ -20,6 +20,7 @@ require (
 	github.com/iris-contrib/middleware v0.0.0-20181021162728-8bd5d51b3c2e
 	github.com/jmoiron/sqlx v1.2.0
 	github.com/json-iterator/go v1.1.6 // indirect
+	github.com/juju/errors v0.0.0-20181118221551-089d3ea4e4d5
 	github.com/kardianos/minwinsvc v0.0.0-20151122163309-cad6b2b879b0
 	github.com/kardianos/osext v0.0.0-20190222173326-2bc1f35cddc0
 	github.com/kataras/golog v0.0.0-20180321173939-03be10146386 // indirect

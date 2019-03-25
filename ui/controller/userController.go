@@ -13,12 +13,14 @@ func Create(ctx iris.Context) {
 
 	if err := ctx.ReadJSON(&user); err != nil {
 		resp := dto.NewResponse(false, nil, err.Error())
+		ctx.StatusCode(iris.StatusBadRequest)
 		var _, _ = ctx.JSON(resp)
 		return
 	}
 
 	if err := util.IsValid(user); err != nil {
 		resp := dto.NewResponse(false, nil, err.Error())
+		ctx.StatusCode(iris.StatusBadRequest)
 		var _, _ = ctx.JSON(resp)
 		return
 	}
@@ -29,6 +31,7 @@ func Create(ctx iris.Context) {
 
 	if err != nil {
 		resp := dto.NewResponse(false, nil, err.Error())
+		ctx.StatusCode(iris.StatusConflict)
 		var _, _ = ctx.JSON(resp)
 		return
 	}
@@ -36,6 +39,7 @@ func Create(ctx iris.Context) {
 	CreateUser := dto.NewCreateUser(UserID)
 
 	resp := dto.NewResponse(true, CreateUser, "")
+	ctx.StatusCode(iris.StatusCreated)
 	var _, _ = ctx.JSON(resp)
 	return
 }
@@ -45,10 +49,12 @@ func Get(ctx iris.Context) {
 	users, err := data.Get()
 	if err != nil {
 		resp := dto.NewResponse(false, nil, err.Error())
+		ctx.StatusCode(iris.StatusInternalServerError)
 		var _, _ = ctx.JSON(resp)
 		return
 	}
 	resp := dto.NewResponse(true, users, "")
+	ctx.StatusCode(iris.StatusOK)
 	var _, _ = ctx.JSON(resp)
 	return
 }
@@ -59,10 +65,12 @@ func GetUser(ctx iris.Context) {
 	user, err := data.GetUser(userID)
 	if err != nil {
 		resp := dto.NewResponse(false, nil, err.Error())
+		ctx.StatusCode(iris.StatusInternalServerError)
 		var _, _ = ctx.JSON(resp)
 		return
 	}
 	resp := dto.NewResponse(true, user, "")
+	ctx.StatusCode(iris.StatusOK)
 	var _, _ = ctx.JSON(resp)
 	return
 }

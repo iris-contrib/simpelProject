@@ -12,11 +12,13 @@ func Login(ctx iris.Context) {
 	login := dto.Login{}
 	if err := ctx.ReadJSON(&login); err != nil {
 		resp := dto.NewResponse(false, nil, err.Error())
+		ctx.StatusCode(iris.StatusBadRequest)
 		var _, _ = ctx.JSON(resp)
 		return
 	}
 	if err := util.IsValid(login); err != nil {
 		resp := dto.NewResponse(false, nil, err.Error())
+		ctx.StatusCode(iris.StatusBadRequest)
 		var _, _ = ctx.JSON(resp)
 		return
 	}
@@ -25,6 +27,7 @@ func Login(ctx iris.Context) {
 
 	if err != nil {
 		resp := dto.NewResponse(false, nil, err.Error())
+		ctx.StatusCode(iris.StatusBadRequest)
 		var _, _ = ctx.JSON(resp)
 		return
 	}
@@ -32,7 +35,8 @@ func Login(ctx iris.Context) {
 	checkPassword := util.ComparePasswords(user.Password, login.Password)
 
 	if checkPassword == false {
-		resp := dto.NewResponse(false, nil, "Password Is Mistake")
+		resp := dto.NewResponse(false, nil, "password is wrong")
+		ctx.StatusCode(iris.StatusBadRequest)
 		var _, _ = ctx.JSON(resp)
 		return
 	}
@@ -41,12 +45,14 @@ func Login(ctx iris.Context) {
 
 	if err != nil {
 		resp := dto.NewResponse(false, nil, err.Error())
+		ctx.StatusCode(iris.StatusInternalServerError)
 		var _, _ = ctx.JSON(resp)
 		return
 	}
 
 	tokenDto := dto.NewToken(token)
 	resp := dto.NewResponse(true, tokenDto, "")
+	ctx.StatusCode(iris.StatusOK)
 	var _, _ = ctx.JSON(resp)
 	return
 }

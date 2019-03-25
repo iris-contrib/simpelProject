@@ -2,7 +2,7 @@ package data
 
 import (
 	"database/sql"
-
+	"errors"
 	"github.com/majidbigdeli/simpelProject/domin/dto"
 	"github.com/majidbigdeli/simpelProject/domin/model"
 )
@@ -56,8 +56,17 @@ func GetUserByUserName(UserName string) (*model.User, error) {
 		sql.Named("UserName", UserName),
 	).StructScan(&user)
 
-	if err != nil && err != sql.ErrNoRows {
-		return nil, err
+	//if err != nil && err != sql.ErrNoRows {
+	//	return nil, err
+	//}
+
+	if err != nil {
+		if err != sql.ErrNoRows {
+			return nil, err
+		} else {
+			//return nil,fmt.Errorf("username not exist")
+			return nil, errors.New("username not exist")
+		}
 	}
 
 	return &user, nil
