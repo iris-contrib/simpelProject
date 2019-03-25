@@ -11,56 +11,42 @@ import (
 func Login(ctx iris.Context) {
 	login := dto.Login{}
 	if err := ctx.ReadJSON(&login); err != nil {
-		response.Data = nil
-		response.Status = false
-		response.ErrorMessage = err.Error()
-		var _, _ = ctx.JSON(response)
+		resp := dto.NewResponse(false, nil, err.Error())
+		var _, _ = ctx.JSON(resp)
 		return
 	}
 	if err := util.IsValid(login); err != nil {
-		response.Data = nil
-		response.Status = false
-		response.ErrorMessage = err.Error()
-		var _, _ = ctx.JSON(response)
+		resp := dto.NewResponse(false, nil, err.Error())
+		var _, _ = ctx.JSON(resp)
 		return
 	}
 
 	user, err := data.GetUserByUserName(login.UserName)
 
 	if err != nil {
-		response.Data = nil
-		response.Status = false
-		response.ErrorMessage = err.Error()
-		var _, _ = ctx.JSON(response)
+		resp := dto.NewResponse(false, nil, err.Error())
+		var _, _ = ctx.JSON(resp)
 		return
 	}
 
 	checkPassword := util.ComparePasswords(user.Password, login.Password)
 
 	if checkPassword == false {
-		response.Data = nil
-		response.Status = false
-		response.ErrorMessage = "Password is mistake"
-		var _, _ = ctx.JSON(response)
+		resp := dto.NewResponse(false, nil, "Password Is Mistake")
+		var _, _ = ctx.JSON(resp)
 		return
 	}
 
 	token, err := util.CreateTokenEndpoint(user)
 
 	if err != nil {
-		response.Data = nil
-		response.Status = false
-		response.ErrorMessage = err.Error()
-		var _, _ = ctx.JSON(response)
+		resp := dto.NewResponse(false, nil, err.Error())
+		var _, _ = ctx.JSON(resp)
 		return
 	}
 
-	var Token dto.Token
-
-	Token.AuthToken = token
-
-	response.Data = Token
-	response.Status = true
-	response.ErrorMessage = ""
-	var _, _ = ctx.JSON(response)
+	tokenDto := dto.NewToken(token)
+	resp := dto.NewResponse(true, tokenDto, "")
+	var _, _ = ctx.JSON(resp)
+	return
 }

@@ -19,3 +19,8 @@ type Login struct {
 type CreateUser struct {
 	UserID *int `json:"UserId"`
 }
+
+//NewCreateUser
+func NewCreateUser(userID *int) *CreateUser {
+	return &CreateUser{UserID: userID}
+}

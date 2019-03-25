@@ -12,18 +12,14 @@ func Create(ctx iris.Context) {
 	user := dto.User{}
 
 	if err := ctx.ReadJSON(&user); err != nil {
-		response.Data = nil
-		response.Status = false
-		response.ErrorMessage = err.Error()
-		var _, _ = ctx.JSON(response)
+		resp := dto.NewResponse(false, nil, err.Error())
+		var _, _ = ctx.JSON(resp)
 		return
 	}
 
 	if err := util.IsValid(user); err != nil {
-		response.Data = nil
-		response.Status = false
-		response.ErrorMessage = err.Error()
-		var _, _ = ctx.JSON(response)
+		resp := dto.NewResponse(false, nil, err.Error())
+		var _, _ = ctx.JSON(resp)
 		return
 	}
 
@@ -32,54 +28,41 @@ func Create(ctx iris.Context) {
 	UserID, err := data.CreateUser(user)
 
 	if err != nil {
-		response.Data = nil
-		response.Status = false
-		response.ErrorMessage = err.Error()
-		var _, _ = ctx.JSON(response)
+		resp := dto.NewResponse(false, nil, err.Error())
+		var _, _ = ctx.JSON(resp)
 		return
 	}
 
-	var CreateUser dto.CreateUser
-	CreateUser.UserID = UserID
-	response.Data = CreateUser
-	response.Status = true
-	response.ErrorMessage = ""
-	var _, _ = ctx.JSON(response)
+	CreateUser := dto.NewCreateUser(UserID)
+
+	resp := dto.NewResponse(true, CreateUser, "")
+	var _, _ = ctx.JSON(resp)
+	return
 }
 
 //Get All User ...
 func Get(ctx iris.Context) {
 	users, err := data.Get()
 	if err != nil {
-		response.Status = false
-		response.Data = nil
-		response.ErrorMessage = err.Error()
-		var _, _ = ctx.JSON(response)
+		resp := dto.NewResponse(false, nil, err.Error())
+		var _, _ = ctx.JSON(resp)
 		return
 	}
-	response.Status = true
-	response.Data = users
-	response.ErrorMessage = ""
-	var _, _ = ctx.JSON(response)
+	resp := dto.NewResponse(true, users, "")
+	var _, _ = ctx.JSON(resp)
+	return
 }
 
 //GetUser : Get User By Token ...
 func GetUser(ctx iris.Context) {
 	userID := util.GetUserIDFromToken(ctx)
-
 	user, err := data.GetUser(userID)
-
 	if err != nil {
-		response.Status = false
-		response.Data = nil
-		response.ErrorMessage = err.Error()
-		var _, _ = ctx.JSON(response)
+		resp := dto.NewResponse(false, nil, err.Error())
+		var _, _ = ctx.JSON(resp)
 		return
 	}
-
-	response.Status = true
-	response.Data = user
-	response.ErrorMessage = ""
-	var _, _ = ctx.JSON(response)
-
+	resp := dto.NewResponse(true, user, "")
+	var _, _ = ctx.JSON(resp)
+	return
 }
