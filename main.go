@@ -10,6 +10,7 @@ import (
 func main() {
 	app := iris.Default()
 	app.Use(util.Cors)
+
 	//AccountController
 	accountController := app.Party("/api/Account")
 	accountController.Post("/Login", controller.Login)
