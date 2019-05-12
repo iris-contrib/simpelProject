@@ -15,7 +15,7 @@ func main() {
 	accountController := app.Party("/api/Account")
 	accountController.Post("/Login", controller.Login)
 
-
+	
 	//UserController
 	userController := app.Party("/api/User", util.MyJwtMiddleware.Serve)
 	userController.Post("/Create", controller.Create)
@@ -23,7 +23,7 @@ func main() {
 	userController.Get("/GetUser", controller.GetUser)
 
 	var _ = app.Run(
-		iris.Addr(":8081"),
+		iris.Addr(":8080"),
 		iris.WithoutServerError(iris.ErrServerClosed),
 		iris.WithOptimizations,
 		iris.WithoutPathCorrectionRedirection,
