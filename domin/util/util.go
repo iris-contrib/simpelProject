@@ -4,6 +4,8 @@ import (
 	"log"
 	"time"
 
+	"github.com/majidbigdeli/simpelProject/domin/dto"
+
 	"github.com/dgrijalva/jwt-go"
 	jwtmiddleware "github.com/iris-contrib/middleware/jwt"
 	"github.com/kataras/iris/context"
@@ -60,7 +62,7 @@ func ComparePasswords(hashedPwd string, password string) bool {
 func CreateTokenEndpoint(user *model.User) (string, error) {
 
 	expireToken := time.Now().Add(time.Hour * 72).Unix()
-	claims := tokenClaims{
+	claims := dto.TokenClaims{
 		UserID:    user.ID,
 		FirstName: user.FirstName,
 		LastName:  user.LastName,
