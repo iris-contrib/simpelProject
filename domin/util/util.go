@@ -61,7 +61,7 @@ func CreateTokenEndpoint(user *model.User) (string, error) {
 
 	expireToken := time.Now().Add(time.Hour * 72).Unix()
 	claims := tokenClaims{
-		UserID:    user.UserID,
+		UserID:    user.ID,
 		FirstName: user.FirstName,
 		LastName:  user.LastName,
 		Email:     user.Email,

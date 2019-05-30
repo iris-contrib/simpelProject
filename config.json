@@ -3,8 +3,8 @@
     "debug": false,
     "password": "Majid1212",
     "port": 1433,
-    "server": "192.168.228.132",
+    "server": "192.168.1.7",
     "user": "SA",
-    "database": "SimpleProject"
+    "database": "Shop"
   }
 }

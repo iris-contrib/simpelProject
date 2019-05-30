@@ -3,7 +3,6 @@ package startup
 import (
 	"fmt"
 
-	"github.com/kardianos/osext"
 	"github.com/majidbigdeli/simpelProject/domin/data"
 
 	_ "github.com/denisenkom/go-mssqldb"
@@ -12,17 +11,17 @@ import (
 )
 
 func init() {
-	path, err := osext.ExecutableFolder()
+	//	path, err := osext.ExecutableFolder()
 
-	if err != nil {
-		panic(fmt.Errorf("Fatal error ExecutableFolder: %s \n", err))
+	// if err != nil {
+	// 	panic(fmt.Errorf("Fatal error ExecutableFolder: %s \n", err))
 
-	}
+	// }
 
 	viper.SetConfigName("config")
-	viper.AddConfigPath(path)
-	err = viper.ReadInConfig() // Find and read the config file
-	if err != nil {            // Handle errors reading the config file
+	viper.AddConfigPath(".")
+	err := viper.ReadInConfig() // Find and read the config file
+	if err != nil {             // Handle errors reading the config file
 		panic(fmt.Errorf("Fatal error config file: %s \n", err))
 	}
 	data.GetDB()
