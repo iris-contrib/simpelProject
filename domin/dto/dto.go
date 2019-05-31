@@ -1,6 +1,8 @@
 package dto
 
 import (
+	"fmt"
+
 	"github.com/dgrijalva/jwt-go"
 )
 
@@ -50,14 +52,26 @@ func NewToken(authToken string) *Token {
 	return &Token{AuthToken: authToken}
 }
 
+type argError struct {
+	Message string
+}
+
+func (e *argError) Error() string {
+	return fmt.Sprintf("%s", e.Message)
+}
+
 //Response dto ....
 type Response struct {
 	Status       bool        `json:"Status"`
 	Data         interface{} `json:"Data"`
-	ErrorMessage error       `json:"ErrorMessage"`
+	ErrorMessage *argError   `json:"ErrorMessage"`
 }
 
 //NewResponse ...
 func NewResponse(status bool, data interface{}, errorMessage error) *Response {
-	return &Response{Status: status, Data: data, ErrorMessage: errorMessage}
+
+	if errorMessage != nil {
+		return &Response{Status: status, Data: data, ErrorMessage: &argError{Message: errorMessage.Error()}}
+	}
+	return &Response{Status: status, Data: data, ErrorMessage: nil}
 }

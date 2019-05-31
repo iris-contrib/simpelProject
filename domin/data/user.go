@@ -2,26 +2,34 @@ package data
 
 import (
 	"database/sql"
-	"errors"
+	"fmt"
+
 	"github.com/majidbigdeli/simpelProject/domin/dto"
 	"github.com/majidbigdeli/simpelProject/domin/model"
 )
 
 //CreateUser ...
 func CreateUser(user dto.User) (*int, error) {
-	var UserID int
-	err := db.QueryRow("app.CreateUser",
-		sql.Named("UserName", user.UserName),
-		sql.Named("Password", user.Password),
+	var userID int
+	err := db.QueryRow("dbo.CreateUser",
 		sql.Named("FirstName", user.FirstName),
 		sql.Named("LastName", user.LastName),
 		sql.Named("Email", user.Email),
-	).Scan(&UserID)
+		sql.Named("UserName", user.UserName),
+		sql.Named("Password", user.Password),
+		sql.Named("Mobile", user.Mobile),
+		sql.Named("NationalCode", user.NationalCode),
+	).Scan(&userID)
 
 	if err != nil {
 		return nil, err
 	}
-	return &UserID, nil
+
+	if userID == 0 {
+		return nil, fmt.Errorf("username is exist")
+	}
+
+	return &userID, nil
 }
 
 // Get All User ...
@@ -56,17 +64,11 @@ func GetUserByUserName(UserName string) (*model.User, error) {
 		sql.Named("UserName", UserName),
 	).StructScan(&user)
 
-	//if err != nil && err != sql.ErrNoRows {
-	//	return nil, err
-	//}
-
 	if err != nil {
 		if err != sql.ErrNoRows {
 			return nil, err
-		} else {
-			//return nil,fmt.Errorf("username not exist")
-			return nil, errors.New("username not exist")
 		}
+		return nil, fmt.Errorf("username not exist")
 	}
 
 	return &user, nil
