@@ -46,7 +46,6 @@ func main() {
 	userController.Post("/Create", controller.Create)
 	userController.Get("/Get", controller.Get)
 	userController.Get("/GetUser", controller.GetUser)
-
 	var _ = app.Run(
 		iris.Addr(":8080"),
 		iris.WithoutServerError(iris.ErrServerClosed),
