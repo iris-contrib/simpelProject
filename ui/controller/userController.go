@@ -12,14 +12,14 @@ func Create(ctx iris.Context) {
 	user := dto.User{}
 
 	if err := ctx.ReadJSON(&user); err != nil {
-		resp := dto.NewResponse(false, nil, err.Error())
+		resp := dto.NewResponse(false, nil, err)
 		ctx.StatusCode(iris.StatusBadRequest)
 		var _, _ = ctx.JSON(resp)
 		return
 	}
 
 	if err := util.IsValid(user); err != nil {
-		resp := dto.NewResponse(false, nil, err.Error())
+		resp := dto.NewResponse(false, nil, err)
 		ctx.StatusCode(iris.StatusBadRequest)
 		var _, _ = ctx.JSON(resp)
 		return
@@ -27,18 +27,18 @@ func Create(ctx iris.Context) {
 
 	user.Password = util.HashAndSalt(user.Password)
 
-	UserID, err := data.CreateUser(user)
+	userID, err := data.CreateUser(user)
 
 	if err != nil {
-		resp := dto.NewResponse(false, nil, err.Error())
+		resp := dto.NewResponse(false, nil, err)
 		ctx.StatusCode(iris.StatusConflict)
 		var _, _ = ctx.JSON(resp)
 		return
 	}
 
-	CreateUser := dto.NewCreateUser(UserID)
+	returnID := dto.NewReturnID(userID)
 
-	resp := dto.NewResponse(true, CreateUser, "")
+	resp := dto.NewResponse(true, returnID, nil)
 	ctx.StatusCode(iris.StatusCreated)
 	var _, _ = ctx.JSON(resp)
 	return
@@ -48,12 +48,12 @@ func Create(ctx iris.Context) {
 func Get(ctx iris.Context) {
 	users, err := data.Get()
 	if err != nil {
-		resp := dto.NewResponse(false, nil, err.Error())
+		resp := dto.NewResponse(false, nil, err)
 		ctx.StatusCode(iris.StatusInternalServerError)
 		var _, _ = ctx.JSON(resp)
 		return
 	}
-	resp := dto.NewResponse(true, users, "")
+	resp := dto.NewResponse(true, users, nil)
 	ctx.StatusCode(iris.StatusOK)
 	var _, _ = ctx.JSON(resp)
 	return
@@ -64,12 +64,12 @@ func GetUser(ctx iris.Context) {
 	userID := util.GetUserIDFromToken(ctx)
 	user, err := data.GetUser(userID)
 	if err != nil {
-		resp := dto.NewResponse(false, nil, err.Error())
+		resp := dto.NewResponse(false, nil, err)
 		ctx.StatusCode(iris.StatusInternalServerError)
 		var _, _ = ctx.JSON(resp)
 		return
 	}
-	resp := dto.NewResponse(true, user, "")
+	resp := dto.NewResponse(true, user, nil)
 	ctx.StatusCode(iris.StatusOK)
 	var _, _ = ctx.JSON(resp)
 	return

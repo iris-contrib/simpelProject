@@ -19,7 +19,7 @@ type User struct {
 	Mobile       string    `db:"mobile"`
 	NationalCode string    `db:"nationalCode"`
 	CreateDate   time.Time `db:"createDate"`
-	updateDate   time.Time `db:"updateDate"`
+	UpdateDate   time.Time `db:"updateDate"`
 	IsDelete     bool      `db:"isDelete"`
 }
 
@@ -30,7 +30,7 @@ type Address struct {
 	Address    string    `db:"address"`
 	Phone      string    `db:"phone"`
 	CreateDate time.Time `db:"createDate"`
-	updateDate time.Time `db:"updateDate"`
+	UpdateDate time.Time `db:"updateDate"`
 	IsDelete   bool      `db:"isDelete"`
 }
 
@@ -40,7 +40,7 @@ type Category struct {
 	Name       string    `db:"name"`
 	ParentID   int32     `db:"parentId"`
 	CreateDate time.Time `db:"createDate"`
-	updateDate time.Time `db:"updateDate"`
+	UpdateDate time.Time `db:"updateDate"`
 	IsDelete   bool      `db:"isDelete"`
 }
 
@@ -50,7 +50,7 @@ type CategoryProduct struct {
 	ProductID  int32     `db:"productId"`
 	CategoryID int32     `db:"categoryId"`
 	CreateDate time.Time `db:"createDate"`
-	updateDate time.Time `db:"updateDate"`
+	UpdateDate time.Time `db:"updateDate"`
 	IsDelete   bool      `db:"isDelete"`
 }
 
@@ -59,7 +59,7 @@ type Feature struct {
 	ID         int32     `db:"id"`
 	Name       string    `db:"name"`
 	CreateDate time.Time `db:"createDate"`
-	updateDate time.Time `db:"updateDate"`
+	UpdateDate time.Time `db:"updateDate"`
 	IsDelete   bool      `db:"isDelete"`
 }
 
@@ -69,7 +69,7 @@ type FeatureValue struct {
 	Value      string    `db:"value"`
 	FeatureID  int32     `db:"featureId"`
 	CreateDate time.Time `db:"createDate"`
-	updateDate time.Time `db:"updateDate"`
+	UpdateDate time.Time `db:"updateDate"`
 	IsDelete   bool      `db:"isDelete"`
 }
 
@@ -85,7 +85,7 @@ type Order struct {
 	SerialNumber      string          `db:"serialNumber"`
 	PaymentStatus     bool            `db:"paymentStatus"`
 	CreateDate        time.Time       `db:"createDate"`
-	updateDate        time.Time       `db:"updateDate"`
+	UpdateDate        time.Time       `db:"updateDate"`
 	IsDelete          bool            `db:"isDelete"`
 }
 
@@ -95,7 +95,7 @@ type OrderProduct struct {
 	OrderID    int32     `db:"orderId"`
 	ProductID  int32     `db:"productId"`
 	CreateDate time.Time `db:"createDate"`
-	updateDate time.Time `db:"updateDate"`
+	UpdateDate time.Time `db:"updateDate"`
 	IsDelete   bool      `db:"isDelete"`
 }
 
@@ -109,7 +109,7 @@ type Product struct {
 	Status      bool            `db:"status"`
 	MainImage   string          `db:"mainImage"`
 	CreateDate  time.Time       `db:"createDate"`
-	updateDate  time.Time       `db:"updateDate"`
+	UpdateDate  time.Time       `db:"updateDate"`
 	IsDelete    bool            `db:"isDelete"`
 }
 
@@ -120,7 +120,7 @@ type ProductComment struct {
 	ProductID  int32     `db:"productId"`
 	Comment    string    `db:"comment"`
 	CreateDate time.Time `db:"createDate"`
-	updateDate time.Time `db:"updateDate"`
+	UpdateDate time.Time `db:"updateDate"`
 	IsDelete   bool      `db:"isDelete"`
 }
 
@@ -130,7 +130,7 @@ type ProductFeature struct {
 	FeatureID  int32     `db:"featureId"`
 	ProductID  int32     `db:"productId"`
 	CreateDate time.Time `db:"createDate"`
-	updateDate time.Time `db:"updateDate"`
+	UpdateDate time.Time `db:"updateDate"`
 	IsDelete   bool      `db:"isDelete"`
 }
 
@@ -140,7 +140,7 @@ type ProductFeatureValue struct {
 	FeatureValueID int32     `db:"featureValueId"`
 	ProductID      int32     `db:"productId"`
 	CreateDate     time.Time `db:"createDate"`
-	updateDate     time.Time `db:"updateDate"`
+	UpdateDate     time.Time `db:"updateDate"`
 	IsDelete       bool      `db:"isDelete"`
 }
 
@@ -150,7 +150,7 @@ type ProductImage struct {
 	Image      string    `db:"image"`
 	ProductID  int32     `db:"productId"`
 	CreateDate time.Time `db:"createDate"`
-	updateDate time.Time `db:"updateDate"`
+	UpdateDate time.Time `db:"updateDate"`
 	IsDelete   bool      `db:"isDelete"`
 }
 
@@ -161,7 +161,7 @@ type ProductPoint struct {
 	UserID     null.Int  `db:"userId"`
 	ProductID  int32     `db:"productId"`
 	CreateDate time.Time `db:"createDate"`
-	updateDate time.Time `db:"updateDate"`
+	UpdateDate time.Time `db:"updateDate"`
 	IsDelete   bool      `db:"isDelete"`
 }
 
@@ -171,7 +171,7 @@ type ProductPriceHistory struct {
 	Price      decimal.Decimal `db:"price"`
 	ProductID  int32           `db:"productId"`
 	CreateDate time.Time       `db:"createDate"`
-	updateDate time.Time       `db:"updateDate"`
+	UpdateDate time.Time       `db:"updateDate"`
 	IsDelete   bool            `db:"isDelete"`
 }
 
@@ -185,7 +185,7 @@ type ProductPromotion struct {
 	Using           int32           `db:"using"`
 	Status          bool            `db:"status"`
 	CreateDate      time.Time       `db:"createDate"`
-	updateDate      time.Time       `db:"updateDate"`
+	UpdateDate      time.Time       `db:"updateDate"`
 	IsDelete        bool            `db:"isDelete"`
 }
 
@@ -195,7 +195,7 @@ type Role struct {
 	Name       string    `db:"name"`
 	Value      int32     `db:"value"`
 	CreateDate time.Time `db:"createDate"`
-	updateDate time.Time `db:"updateDate"`
+	UpdateDate time.Time `db:"updateDate"`
 	IsDelete   bool      `db:"isDelete"`
 }
 
@@ -206,7 +206,7 @@ type Slider struct {
 	Status     bool      `db:"status"`
 	URL        string    `db:"url"`
 	CreateDate time.Time `db:"createDate"`
-	updateDate time.Time `db:"updateDate"`
+	UpdateDate time.Time `db:"updateDate"`
 	IsDelete   bool      `db:"isDelete"`
 }
 
@@ -218,7 +218,7 @@ type Transcation struct {
 	Price             decimal.Decimal `db:"price"`
 	OrderID           int32           `db:"orderId"`
 	CreateDate        time.Time       `db:"createDate"`
-	updateDate        time.Time       `db:"updateDate"`
+	UpdateDate        time.Time       `db:"updateDate"`
 	IsDelete          bool            `db:"isDelete"`
 }
 
@@ -228,7 +228,7 @@ type UserAddress struct {
 	UserID     int32     `db:"userId"`
 	AddressID  int32     `db:"addressId"`
 	CreateDate time.Time `db:"createDate"`
-	updateDate time.Time `db:"updateDate"`
+	UpdateDate time.Time `db:"updateDate"`
 	IsDelete   bool      `db:"isDelete"`
 }
 
@@ -238,7 +238,7 @@ type UserFavorateProduct struct {
 	UserID     int32     `db:"userId"`
 	ProductID  int32     `db:"productId"`
 	CreateDate time.Time `db:"createDate"`
-	updateDate time.Time `db:"updateDate"`
+	UpdateDate time.Time `db:"updateDate"`
 	IsDelete   bool      `db:"isDelete"`
 }
 
@@ -248,6 +248,6 @@ type UserRole struct {
 	UserID     int32     `db:"userId"`
 	RoleID     int32     `db:"roleId"`
 	CreateDate time.Time `db:"createDate"`
-	updateDate time.Time `db:"updateDate"`
+	UpdateDate time.Time `db:"updateDate"`
 	IsDelete   bool      `db:"isDelete"`
 }

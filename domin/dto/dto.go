@@ -1,14 +1,18 @@
 package dto
 
-import "github.com/dgrijalva/jwt-go"
+import (
+	"github.com/dgrijalva/jwt-go"
+)
 
 // User dto ....
 type User struct {
-	FirstName string `json:"FirstName" validate:"required"`
-	LastName  string `json:"LastName" validate:"required"`
-	Email     string `json:"Email" validate:"required,email"`
-	UserName  string `json:"UserName" validate:"required"`
-	Password  string `json:"Password" validate:"required"`
+	FirstName    string `json:"FirstName" validate:"required"`
+	LastName     string `json:"LastName" validate:"required"`
+	Email        string `json:"Email" validate:"required,email"`
+	UserName     string `json:"UserName" validate:"required"`
+	Password     string `json:"Password" validate:"required"`
+	Mobile       string `json:"Mobile" validate:"required"`
+	NationalCode string `json:"NationalCode" validate:"required"`
 }
 
 // Login dto ....
@@ -17,14 +21,14 @@ type Login struct {
 	Password string `json:"Password" validate:"required"`
 }
 
-//CreateUser dto ...
-type CreateUser struct {
+//ReturnID dto ...
+type ReturnID struct {
 	UserID *int `json:"UserId"`
 }
 
-//NewCreateUser ...
-func NewCreateUser(userID *int) *CreateUser {
-	return &CreateUser{UserID: userID}
+//NewReturnID ...
+func NewReturnID(userID *int) *ReturnID {
+	return &ReturnID{UserID: userID}
 }
 
 //TokenClaims ....
@@ -50,10 +54,10 @@ func NewToken(authToken string) *Token {
 type Response struct {
 	Status       bool        `json:"Status"`
 	Data         interface{} `json:"Data"`
-	ErrorMessage string      `json:"ErrorMessage"`
+	ErrorMessage error       `json:"ErrorMessage"`
 }
 
 //NewResponse ...
-func NewResponse(status bool, data interface{}, errorMessage string) *Response {
+func NewResponse(status bool, data interface{}, errorMessage error) *Response {
 	return &Response{Status: status, Data: data, ErrorMessage: errorMessage}
 }

@@ -11,7 +11,6 @@ import (
 	"github.com/kataras/iris/context"
 	"github.com/majidbigdeli/simpelProject/domin/model"
 	"golang.org/x/crypto/bcrypt"
-	"gopkg.in/go-playground/validator.v9"
 )
 
 //JwtKey ...
@@ -101,8 +100,7 @@ func CreateTokenEndpoint(user *model.User) (string, error) {
 
 //IsValid ...
 func IsValid(model interface{}) error {
-	var validate *validator.Validate
-	validate = validator.New()
+
 	err := validate.Struct(model)
 	return err
 }
