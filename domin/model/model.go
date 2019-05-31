@@ -3,7 +3,9 @@ package model
 import (
 	"time"
 
-	mssql "github.com/denisenkom/go-mssqldb"
+	"github.com/shopspring/decimal"
+
+	"gopkg.in/guregu/null.v3"
 )
 
 //User model ....
@@ -73,18 +75,18 @@ type FeatureValue struct {
 
 //Order model ....
 type Order struct {
-	ID                int32         `db:"id"`
-	PaymentType       int32         `db:"paymentType"`
-	AddressID         int32         `db:"addressId"`
-	TotalPricePayable mssql.Decimal `db:"totalPricePayable"`
-	TtalPrice         mssql.Decimal `db:"totalPrice"`
-	Amount            int32         `db:"amount"`
-	Workflow          int32         `db:"workflow"`
-	SerialNumber      string        `db:"serialNumber"`
-	PaymentStatus     bool          `db:"paymentStatus"`
-	CreateDate        time.Time     `db:"createDate"`
-	updateDate        time.Time     `db:"updateDate"`
-	IsDelete          bool          `db:"isDelete"`
+	ID                int32           `db:"id"`
+	PaymentType       int32           `db:"paymentType"`
+	AddressID         int32           `db:"addressId"`
+	TotalPricePayable decimal.Decimal `db:"totalPricePayable"`
+	TtalPrice         decimal.Decimal `db:"totalPrice"`
+	Amount            int32           `db:"amount"`
+	Workflow          int32           `db:"workflow"`
+	SerialNumber      string          `db:"serialNumber"`
+	PaymentStatus     bool            `db:"paymentStatus"`
+	CreateDate        time.Time       `db:"createDate"`
+	updateDate        time.Time       `db:"updateDate"`
+	IsDelete          bool            `db:"isDelete"`
 }
 
 //OrderProduct model ....
@@ -99,16 +101,16 @@ type OrderProduct struct {
 
 //Product model ....
 type Product struct {
-	ID          int32         `db:"id"`
-	FullName    string        `db:"fullName"`
-	Price       mssql.Decimal `db:"price"`
-	Summery     string        `db:"summery"`
-	Description string        `db:"description"`
-	Status      bool          `db:"status"`
-	MainImage   string        `db:"mainImage"`
-	CreateDate  time.Time     `db:"createDate"`
-	updateDate  time.Time     `db:"updateDate"`
-	IsDelete    bool          `db:"isDelete"`
+	ID          int32           `db:"id"`
+	FullName    string          `db:"fullName"`
+	Price       decimal.Decimal `db:"price"`
+	Summery     string          `db:"summery"`
+	Description string          `db:"description"`
+	Status      bool            `db:"status"`
+	MainImage   string          `db:"mainImage"`
+	CreateDate  time.Time       `db:"createDate"`
+	updateDate  time.Time       `db:"updateDate"`
+	IsDelete    bool            `db:"isDelete"`
 }
 
 //ProductComment model ....
@@ -156,7 +158,7 @@ type ProductImage struct {
 type ProductPoint struct {
 	ID         int32     `db:"id"`
 	Point      int32     `db:"point"`
-	UserID     *int32    `db:"userId"`
+	UserID     null.Int  `db:"userId"`
 	ProductID  int32     `db:"productId"`
 	CreateDate time.Time `db:"createDate"`
 	updateDate time.Time `db:"updateDate"`
@@ -165,26 +167,26 @@ type ProductPoint struct {
 
 //ProductPriceHistory model ....
 type ProductPriceHistory struct {
-	ID         int32         `db:"id"`
-	Price      mssql.Decimal `db:"price"`
-	ProductID  int32         `db:"productId"`
-	CreateDate time.Time     `db:"createDate"`
-	updateDate time.Time     `db:"updateDate"`
-	IsDelete   bool          `db:"isDelete"`
+	ID         int32           `db:"id"`
+	Price      decimal.Decimal `db:"price"`
+	ProductID  int32           `db:"productId"`
+	CreateDate time.Time       `db:"createDate"`
+	updateDate time.Time       `db:"updateDate"`
+	IsDelete   bool            `db:"isDelete"`
 }
 
 //ProductPromotion model ....
 type ProductPromotion struct {
-	ID              int32         `db:"id"`
-	Name            string        `db:"name"`
-	ProductID       int32         `db:"productId"`
-	DisCountPercent int32         `db:"disCountPercent"`
-	Price           mssql.Decimal `db:"price"`
-	Using           int32         `db:"using"`
-	Status          bool          `db:"status"`
-	CreateDate      time.Time     `db:"createDate"`
-	updateDate      time.Time     `db:"updateDate"`
-	IsDelete        bool          `db:"isDelete"`
+	ID              int32           `db:"id"`
+	Name            string          `db:"name"`
+	ProductID       int32           `db:"productId"`
+	DisCountPercent int32           `db:"disCountPercent"`
+	Price           decimal.Decimal `db:"price"`
+	Using           int32           `db:"using"`
+	Status          bool            `db:"status"`
+	CreateDate      time.Time       `db:"createDate"`
+	updateDate      time.Time       `db:"updateDate"`
+	IsDelete        bool            `db:"isDelete"`
 }
 
 //Role model ....
@@ -210,14 +212,14 @@ type Slider struct {
 
 //Transcation model ....
 type Transcation struct {
-	ID                int32         `db:"id"`
-	TranscationNumber string        `db:"transcationNumber"`
-	StatusCode        int32         `db:"statusCode"`
-	Price             mssql.Decimal `db:"price"`
-	OrderID           int32         `db:"orderId"`
-	CreateDate        time.Time     `db:"createDate"`
-	updateDate        time.Time     `db:"updateDate"`
-	IsDelete          bool          `db:"isDelete"`
+	ID                int32           `db:"id"`
+	TranscationNumber string          `db:"transcationNumber"`
+	StatusCode        int32           `db:"statusCode"`
+	Price             decimal.Decimal `db:"price"`
+	OrderID           int32           `db:"orderId"`
+	CreateDate        time.Time       `db:"createDate"`
+	updateDate        time.Time       `db:"updateDate"`
+	IsDelete          bool            `db:"isDelete"`
 }
 
 //UserAddress model ....

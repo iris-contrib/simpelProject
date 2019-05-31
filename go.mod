@@ -34,6 +34,8 @@ require (
 	github.com/shopspring/decimal v0.0.0-20180709203117-cd690d0c9e24
 	github.com/shurcooL/sanitized_anchor_name v1.0.0 // indirect
 	github.com/spf13/viper v1.3.2
+	github.com/volatiletech/null v8.0.0+incompatible
 	golang.org/x/crypto v0.0.0-20190418165655-df01cb2cc480
 	gopkg.in/go-playground/validator.v9 v9.28.0
+	gopkg.in/guregu/null.v3 v3.4.0
 )
