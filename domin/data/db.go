@@ -2,6 +2,7 @@ package data
 
 import (
 	"fmt"
+
 	"github.com/jmoiron/sqlx"
 	"github.com/spf13/viper"
 )
@@ -36,6 +37,9 @@ func GetDB() {
 		//log.Fatal("Open connection failed:", err.Error())
 		panic(err)
 	}
+
+	conn.SetMaxOpenConns(5)
+	conn.SetMaxIdleConns(5)
 
 	//	fmt.Printf("Connected!\n")
 	//	defer conn.Close()

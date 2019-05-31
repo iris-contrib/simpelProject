@@ -35,7 +35,7 @@ func CreateUser(user dto.User) (*int, error) {
 // Get All User ...
 func Get() (*[]model.User, error) {
 	var d []model.User
-	err := db.Select(&d, "app.GetUser")
+	err := db.Select(&d, "dbo.GetUser")
 	return &d, err
 }
 
@@ -44,7 +44,7 @@ func GetUser(userID float64) (*model.User, error) {
 
 	var user model.User
 	err := db.QueryRowx(
-		"app.GetUserByUserId",
+		"dbo.GetUserByUserId",
 		sql.Named("UserId", userID),
 	).StructScan(&user)
 
@@ -60,7 +60,7 @@ func GetUser(userID float64) (*model.User, error) {
 func GetUserByUserName(UserName string) (*model.User, error) {
 	var user model.User
 	err := db.QueryRowx(
-		"app.GetUserByUserName",
+		"dbo.GetUserByUserName",
 		sql.Named("UserName", UserName),
 	).StructScan(&user)
 

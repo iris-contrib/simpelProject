@@ -42,7 +42,7 @@ func main() {
 	accountController.Post("/Login", controller.Login)
 
 	//UserController
-	userController := app.Party("/api/User", util.MyJwtMiddleware.Serve)
+	userController := app.Party("/api/User")
 	userController.Post("/Create", controller.Create)
 	userController.Get("/Get", controller.Get)
 	userController.Get("/GetUser", controller.GetUser)
