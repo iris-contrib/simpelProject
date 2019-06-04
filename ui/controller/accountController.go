@@ -11,7 +11,7 @@ import (
 
 //Login ...
 func Login(ctx iris.Context) {
-	login := dto.Login{}
+	login := dto.LoginDto{}
 	if err := ctx.ReadJSON(&login); err != nil {
 		resp := dto.NewResponse(false, nil, err)
 		ctx.StatusCode(iris.StatusBadRequest)

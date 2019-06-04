@@ -9,7 +9,7 @@ import (
 
 //Create User ...
 func Create(ctx iris.Context) {
-	user := dto.User{}
+	user := dto.UserDto{}
 
 	if err := ctx.ReadJSON(&user); err != nil {
 		resp := dto.NewResponse(false, nil, err)

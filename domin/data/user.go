@@ -9,7 +9,7 @@ import (
 )
 
 //CreateUser ...
-func CreateUser(user dto.User) (*int, error) {
+func CreateUser(user dto.UserDto) (*int, error) {
 	var userID int
 	err := db.QueryRow("dbo.CreateUser",
 		sql.Named("FirstName", user.FirstName),

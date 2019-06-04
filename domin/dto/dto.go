@@ -6,8 +6,8 @@ import (
 	"github.com/dgrijalva/jwt-go"
 )
 
-// User dto ....
-type User struct {
+// UserDto dto ....
+type UserDto struct {
 	FirstName    string `json:"FirstName" validate:"required"`
 	LastName     string `json:"LastName" validate:"required"`
 	Email        string `json:"Email" validate:"required,email"`
@@ -17,8 +17,8 @@ type User struct {
 	NationalCode string `json:"NationalCode" validate:"required"`
 }
 
-// Login dto ....
-type Login struct {
+// LoginDto dto ....
+type LoginDto struct {
 	UserName string `json:"UserName" validate:"required"`
 	Password string `json:"Password" validate:"required"`
 }
@@ -26,11 +26,6 @@ type Login struct {
 //ReturnID dto ...
 type ReturnID struct {
 	UserID *int `json:"UserId"`
-}
-
-//NewReturnID ...
-func NewReturnID(userID *int) *ReturnID {
-	return &ReturnID{UserID: userID}
 }
 
 //TokenClaims ....
@@ -42,36 +37,42 @@ type TokenClaims struct {
 	jwt.StandardClaims
 }
 
-//Token dto ...
-type Token struct {
+//TokenDto dto ...
+type TokenDto struct {
 	AuthToken string `json:"Auth_Token"`
 }
 
-//NewToken ...
-func NewToken(authToken string) *Token {
-	return &Token{AuthToken: authToken}
-}
-
-type argError struct {
+type customError struct {
 	Message string
 }
 
-func (e *argError) Error() string {
-	return fmt.Sprintf("%s", e.Message)
-}
-
-//Response dto ....
-type Response struct {
-	Status       bool        `json:"Status"`
-	Data         interface{} `json:"Data"`
-	ErrorMessage *argError   `json:"ErrorMessage"`
+//ResponseDto dto ....
+type ResponseDto struct {
+	Status       bool         `json:"Status"`
+	Data         interface{}  `json:"Data"`
+	ErrorMessage *customError `json:"ErrorMessage"`
 }
 
 //NewResponse ...
-func NewResponse(status bool, data interface{}, errorMessage error) *Response {
+func NewResponse(status bool, data interface{}, errorMessage error) *ResponseDto {
 
 	if errorMessage != nil {
-		return &Response{Status: status, Data: data, ErrorMessage: &argError{Message: errorMessage.Error()}}
+		return &ResponseDto{Status: status, Data: data, ErrorMessage: &customError{Message: errorMessage.Error()}}
 	}
-	return &Response{Status: status, Data: data, ErrorMessage: nil}
+
+	return &ResponseDto{Status: status, Data: data, ErrorMessage: nil}
+}
+
+//NewReturnID ...
+func NewReturnID(userID *int) *ReturnID {
+	return &ReturnID{UserID: userID}
+}
+
+//NewToken ...
+func NewToken(authToken string) *TokenDto {
+	return &TokenDto{AuthToken: authToken}
+}
+
+func (e *customError) Error() string {
+	return fmt.Sprintf("%s", e.Message)
 }
