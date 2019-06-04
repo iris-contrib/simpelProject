@@ -21,7 +21,7 @@ require (
 	github.com/kataras/golog v0.0.0-20180321173939-03be10146386 // indirect
 	github.com/kataras/iris v11.1.1+incompatible
 	github.com/kataras/pio v0.0.0-20190103105442-ea782b38602d // indirect
-	github.com/klauspost/compress v1.5.0 // indirect
+	github.com/klauspost/compress v1.6.0 // indirect
 	github.com/klauspost/cpuid v1.2.1 // indirect
 	github.com/leodido/go-urn v1.1.0 // indirect
 	github.com/microcosm-cc/bluemonday v1.0.2 // indirect
@@ -31,7 +31,7 @@ require (
 	github.com/shopspring/decimal v0.0.0-20180709203117-cd690d0c9e24
 	github.com/shurcooL/sanitized_anchor_name v1.0.0 // indirect
 	github.com/spf13/viper v1.4.0
-	golang.org/x/crypto v0.0.0-20190530122614-20be4c3c3ed5
+	golang.org/x/crypto v0.0.0-20190325154230-a5d413f7728c
 	gopkg.in/go-playground/validator.v9 v9.29.0
 	gopkg.in/guregu/null.v3 v3.4.0
 )
