@@ -4,10 +4,11 @@ import (
 	"log"
 	"time"
 
+	"github.com/majidbigdeli/simpelProject/domin/model"
+
 	"github.com/dgrijalva/jwt-go"
 	jwtmiddleware "github.com/iris-contrib/middleware/jwt"
-	"github.com/kataras/iris/context"
-	"github.com/majidbigdeli/simpelProject/domin/model"
+	"github.com/kataras/iris/v12"
 	"golang.org/x/crypto/bcrypt"
 	"gopkg.in/go-playground/validator.v9"
 )
@@ -106,7 +107,7 @@ func IsValid(model interface{}) error {
 }
 
 //GetUserIDFromToken ....
-func GetUserIDFromToken(ctx context.Context) float64 {
+func GetUserIDFromToken(ctx iris.Context) float64 {
 	userToken := MyJwtMiddleware.Get(ctx)
 
 	var userID float64
@@ -119,14 +120,14 @@ func GetUserIDFromToken(ctx context.Context) float64 {
 }
 
 //Cors Origin...
-func Cors(ctx context.Context) {
+func Cors(ctx iris.Context) {
 	ctx.Header("Access-Control-Allow-Origin", "*")
 	ctx.Header("Access-Control-Allow-Credentials", "true")
 	ctx.Next()
 }
 
 //GetCors ...
-//func GetCors() context.Handler {
+//func GetCors() iris.Handler {
 //	crs := cors.New(cors.Options{
 //		AllowedOrigins:   []string{"*"},
 //		AllowCredentials: true,

@@ -11,7 +11,7 @@ import (
 	"SimpleProject/Domin/util"
 	"SimpleProject/UI/controller"
 	_ "github.com/denisenkom/go-mssqldb"
-	"github.com/kataras/iris"
+	"github.com/kataras/iris/v12"
 	"log"
 
 	"github.com/kardianos/service"

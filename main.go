@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/kataras/iris"
+	"github.com/kataras/iris/v12"
 	"github.com/majidbigdeli/simpelProject/domin/util"
 	_ "github.com/majidbigdeli/simpelProject/startup"
 	"github.com/majidbigdeli/simpelProject/ui/controller"
